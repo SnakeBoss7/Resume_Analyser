@@ -1,0 +1,8 @@
+Below is my resume text:
+
+{{ResumeText}}
+I am applying for the role:
+
+{{JobROle}}
+
+Evaluate my resume based on the role and return your response in strict JSON format only, following your internal instructions.
