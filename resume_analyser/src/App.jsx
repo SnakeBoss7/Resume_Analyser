@@ -49,7 +49,7 @@ function App() {
       <Routes>
      
           <Route path="/" element={<Landing />} />
-          <Route path="/single_analyzer" element={<SingleAnalyzer />} />
+          <Route path="/Single_analyzer" element={<SingleAnalyzer />} />
           <Route path="/hr_dashboard" element={<MultiAnalyzer />} />
      
       </Routes>

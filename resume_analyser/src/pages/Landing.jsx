@@ -6,10 +6,10 @@ import axios from "axios";
 import Features from "../components/features";
 import iconMap from "../icons/icon"; 
 import Header from "../components/header";
-import { FaArrowRight } from "react-icons/fa";
-import { Links } from "react-router-dom";
-import { FaFileAlt,FaUsers } from "react-icons/fa";
+import { FaArrowRight,FaFileAlt,FaUsers } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useProvider } from '../context/user_data';
+
 const featuresData = [
   {
     icon: 'NewspaperIcon',
@@ -34,11 +34,12 @@ const featuresData = [
 ];
 
 export default function Landing() {
+  const {userData,setUserData} = useProvider();
   const [file_name, setFile_name] = useState("");
   const [mess, setMess] = useState("");
     const [isloading, setIsLoading] = useState(false);
     const navigate = useNavigate(); 
-    const [user_data, setUser_data] = useState('');
+    // const [user_data, setUser_data] = useState('');
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -51,8 +52,9 @@ function delay(ms) {
       try{
         let res = await axios.post('http://localhost:5000/api/resume/analyze',formdata)
         console.log(res.data.data.ATS_Compatibility.ATS_Score);
-        setUser_data(res.data.data);
-        console.log(user_data);
+        setUserData(res.data.data);
+        console.log(userData);
+   
         await delay(7000);
         navigate("/single_analyzer");
       }
@@ -65,7 +67,7 @@ function delay(ms) {
     }
 
   return (
-    <div className="Home flex flex-col gap-10 items-center">
+    <div className=" flex flex-col gap-10 items-center">
       {/* Header section  */}
       <Header pages={['Resmue analyzer','Hr Dashboard']} links={['single_analyzer','Hr_dashboard']}    icons={[FaFileAlt, FaUsers]} />
       {/* Theme toggle button  */}
@@ -119,8 +121,8 @@ function delay(ms) {
       </div>
 
       {/* Analyse redirection section  */}
-      <div class="h-[400px] w-full p-5 box-border  z-99999 ">
-        <div class="box flex flex-col p-5 items-center justify-evenly w-full h-full bg-gradient-to-r from-primary via-primary_lg to-purple-500 text-white font-normal tracking-tight  rounded-xl">
+      <div className="mx-auto container">
+        <div class="box h-[300px] flex flex-col p-5 items-center justify-evenly w-full  bg-gradient-to-r from-primary via-primary_lg to-purple-500 text-white font-normal tracking-tight  rounded-xl">
           <div class="textual_dta">
             <h1 className="md:text-4xl text-3xl text-center font-extrabold ">
               Ready to optimize your resume?
@@ -134,7 +136,8 @@ function delay(ms) {
             Start Free Analysis <FaArrowRight />
           </button>
         </div>
-      </div>
+        </div>
+      
       {/* Sentinel for Footer visibility */}
       <div id="footer-sentinel" className="w-full h-1"></div>
       {/* Footer section  */}
