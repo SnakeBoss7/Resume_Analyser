@@ -67,7 +67,7 @@ function delay(ms) {
     }
 
   return (
-    <div className=" flex flex-col gap-10 items-center">
+    <div className=" flex flex-col gap-10 items-center" style={{backgroundColor: "#E5EBF2"}}>
       {/* Header section  */}
       <Header pages={['Resmue analyzer','Hr Dashboard']} links={['single_analyzer','Hr_dashboard']}    icons={[FaFileAlt, FaUsers]} />
       {/* Theme toggle button  */}

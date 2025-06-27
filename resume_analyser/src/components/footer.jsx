@@ -55,7 +55,8 @@ export default function Footer() {
       </ul>
     </StyledWrapper>
         </div>
-        <h1 className=" text-8xl font-playfair">FOOTER</h1>
+        <h1 className=" text-8xl font-playfair">Resume
+AI</h1>
       </div>
     </footer>
   );
