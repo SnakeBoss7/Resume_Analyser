@@ -3,10 +3,9 @@ import React, { useState, useRef } from "react";
 import { FaArrowRight,FaUpload } from "react-icons/fa";
 import styled from "styled-components";
 
-export default function FileDropzone({ onFileSelected ,rend}) {
+export default function FileDropzone({ onFileSelected ,heading,subheading,button,height,width}) {
   const [dragActive, setDragActive] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [isloading, setIsLoading] = useState(false); 
   const inputRef = useRef(null);
 
 
@@ -45,14 +44,14 @@ export default function FileDropzone({ onFileSelected ,rend}) {
   };
 
   return (
-    <div className="mt-10 w-full h-[400px]   bg-gray-100 text-center rounded-2xl flex justify-center items-center">
+    <div className={`mt-10 w-full h-[${height}] md:h-300px text-center rounded-2xl flex justify-center items-center`} style={{backgroundColor: "#E5EBF2"}} >
       <div
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
         onDragOver={handleDrag}
         onDrop={handleDrop}
         onClick={handleClick}
-        className={` md:w-2/5 w-4/5 h-full  px-164 box-border flex  justify-center items-center  border-4 border-dashed transition-colors duration-300 p-10 rounded-2xl cursor-pointer text-center ${
+        className={` md:w-full w-full h-3/4 md:h-full box-border flex  justify-center items-center hover:border-blue-700 tansition-all duration-300  border-[3px] border-dashed transition-colors duration-300  md:p-4 md:py-5 rounded-2xl cursor-pointer text-center ${
           dragActive ? "border-blue-800 bg-blue-50" : "border-gray-400 bg-white"
         }`}
       >
@@ -100,16 +99,16 @@ export default function FileDropzone({ onFileSelected ,rend}) {
     </StyledWrapper></>
           ) : (
             <>
-              <FaUpload className="h-14 w-14 bg-blue-100 p-3 rounded-3xl text-blue-500 mb-4" />
-              <h1 className="text-3xl font-bold">Upload Your Resume</h1>
-              <p className="text-gray-500 mt-2">
-                Drag and drop your file here or click to select
-              </p>
-              <p className="text-gray-500 mt-2">
+              {heading?<><FaUpload className="h-14 w-14 bg-blue-100 p-3 m-5 rounded-3xl text-blue-500 mb-4" />
+              <h1 className="md:text-3xl text-2xl font-bold">{heading}</h1></>:<></>}
+              <span className="text-gray-400 text-sm tracking-tight mt-3 mx-1">
+                {subheading}
+              </span>
+              <span className="text-gray-400  text-sm tracking-tight mb-3 mx-2">
                 Supported formats: PDF, DOCX, JPEG
-              </p>
-              <button className="flex items-center gap-2 border-2 px-5 rounded-xl py-3 transition-all duration-200 bg-blue-500 text-bold text-lg text-white hover:bg-blue-300">
-                Choose File <FaArrowRight />{" "}
+              </span>
+              <button className="flex items-center gap-2 border-2 px-5 mb-5 rounded-xl py-3 transition-all duration-200 bg-blue-500 text-bold text-lg text-white hover:bg-blue-300">
+                {button} <FaArrowRight />{" "}
               </button>
             </>
           )}

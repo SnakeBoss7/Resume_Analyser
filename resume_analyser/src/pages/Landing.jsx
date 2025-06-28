@@ -2,14 +2,13 @@ import React from "react";
 import Footer from "../components/footer";
 import { useState } from "react";
 import FileDropzone from "../components/FileDropzone";
-import axios from "axios";
 import Features from "../components/features";
 import iconMap from "../icons/icon"; 
 import Header from "../components/header";
 import { FaArrowRight,FaFileAlt,FaUsers } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 import { useProvider } from '../context/user_data';
-
+import { HandleUpload } from "../utils/upload";
+import { useNavigate } from "react-router-dom";
 const featuresData = [
   {
     icon: 'NewspaperIcon',
@@ -37,43 +36,40 @@ export default function Landing() {
   const {userData,setUserData} = useProvider();
   const [file_name, setFile_name] = useState("");
   const [mess, setMess] = useState("");
-    const [isloading, setIsLoading] = useState(false);
-    const navigate = useNavigate(); 
-    // const [user_data, setUser_data] = useState('');
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-  const handleUpload = async (File)=>
+    const navigate = useNavigate();
+    
+    
+ const HandleFile = async (File)=>
     {
-      let formdata = new FormData();
-      formdata.append("resume", File);
-      
-      try{
-        let res = await axios.post('http://localhost:5000/api/resume/analyze',formdata)
-        console.log(res.data.data.ATS_Compatibility.ATS_Score);
-        setUserData(res.data.data);
-        console.log(userData);
-   
-        await delay(7000);
-        navigate("/single_analyzer");
+      let {data,mess} = await HandleUpload(File);
+      if(data)
+        {
+          setUserData(data);
+          setMess('')
+          navigate('/single_analyzer')
+        }
+        else
+        {
+        setUserData({});
+        setMess(mess)
       }
-      catch(err)
-      {
-        console.log(err)
-        setMess('Something went wrong!');
-      }
-
     }
 
   return (
-    <div className=" flex flex-col gap-10 items-center" style={{backgroundColor: "#E5EBF2"}}>
+    <div
+      className=" flex flex-col gap-10 items-center"
+      style={{ backgroundColor: "#E5EBF2" }}
+    >
       {/* Header section  */}
-      <Header pages={['Resmue analyzer','Hr Dashboard']} links={['single_analyzer','Hr_dashboard']}    icons={[FaFileAlt, FaUsers]} />
+      <Header
+        pages={["Resmue analyzer", "Hr Dashboard"]}
+        links={["single_analyzer", "Hr_dashboard"]}
+        icons={[FaFileAlt, FaUsers]}
+      />
       {/* Theme toggle button  */}
       {/* Hero section  */}
       <div className="hero  flex flex-col items-center  w-full">
-        <span className=" mb-5 text-blue-700 text-xs font-normal tracking-tight bg-gray-200 px-3 py-1 rounded-xl hover:bg-gray-300 transition ease-in-out duration-300">
+        <span className=" mb-5 text-blue-700 text-xs font-normal tracking-tight bg-white px-3 py-1 rounded-xl hover:bg-gray-300 transition ease-in-out duration-300">
           ✨ Powered by Advanced AI
         </span>
         <h1 className="text-center  md:text-7xl text-4xl mb-2 font-black tracking-tight">
@@ -91,8 +87,15 @@ function delay(ms) {
           AI-powered insights.
         </p>
         {/* Dropper  */}
-        <div className="file_upload mb-7 w-full flex justify-center items-center">
-           <FileDropzone onFileSelected={handleUpload } rend={isloading? '':''} />
+        <div className="file_upload mb-7 md:w-[500px] w-[90%] flex justify-center items-center">
+          <FileDropzone
+            onFileSelected={HandleFile}
+            heading="Upload your resume"
+            subheading="Drag and drop your resume file here or click to select"
+            button='Choose file'
+            height="350px"
+            width="w-full"
+          />
         </div>
       </div>
 
@@ -121,13 +124,13 @@ function delay(ms) {
       </div>
 
       {/* Analyse redirection section  */}
-      <div className="mx-auto container">
+      <div className=" px-5  mx-auto md:container md:p-0 w-full" >
         <div class="box h-[300px] flex flex-col p-5 items-center justify-evenly w-full  bg-gradient-to-r from-primary via-primary_lg to-purple-500 text-white font-normal tracking-tight  rounded-xl">
           <div class="textual_dta">
             <h1 className="md:text-4xl text-3xl text-center font-extrabold ">
               Ready to optimize your resume?
             </h1>
-            <h3 className="text-center text-xl mt-4 font-normal tracking-tight">
+            <h3 className="text-center text-gray-200 text-sm mt-4 font-bold tracking-tight">
               Join thousands of professionals who have improved their job
               prospects with ResumeAI.
             </h3>
@@ -136,10 +139,10 @@ function delay(ms) {
             Start Free Analysis <FaArrowRight />
           </button>
         </div>
-        </div>
-      
-      {/* Sentinel for Footer visibility */}
-      <div id="footer-sentinel" className="w-full h-1"></div>
+      </div>
+
+
+
       {/* Footer section  */}
       <Footer />
     </div>

@@ -9,10 +9,10 @@ export default function Footer() {
 
   return (
     <footer
-      className="w-full  h-[300px] relative  "
+      className="w-full h-[300px] relative  "
       style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0 100%)" }}
     >
-      <div className="flex flex-col justify-between p-5 h-[300px] bg-gradient-to-r from-primary via-blue-400 to-primary_lg  w-full fixed text-white bottom-0">
+      <div className="flex flex-col justify-between  p-5 h-[200px] md:h-[250px] bg-gradient-to-r from-primary via-blue-400 to-primary_lg  w-full fixed text-white bottom-0">
         <div class="contact flex gap-5 ">
               <StyledWrapper>
       <ul className="example-2">
@@ -55,7 +55,7 @@ export default function Footer() {
       </ul>
     </StyledWrapper>
         </div>
-        <h1 className=" text-8xl font-playfair">Resume
+        <h1 className=" text-7xl md:text-8xl  font-playfair">Resume
 AI</h1>
       </div>
     </footer>
@@ -112,8 +112,8 @@ const StyledWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     color: #4d4d4d;
     background-color: #fff;
@@ -125,8 +125,8 @@ const StyledWrapper = styled.div`
   .example-2 .icon-content a svg {
     position: relative;
     z-index: 1;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
   }
   .example-2 .icon-content a:hover {
     color: white;
