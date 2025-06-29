@@ -6,10 +6,13 @@ import {
   FaStar,
   FaChartLine,
 } from "react-icons/fa";
+import axios from "axios";
 import React, { useState } from "react";
-export const Chatbot = ({ job_role, ats }) => {
+import { useProvider } from "../../context/user_data";
+export const Chatbot = ({ parsedText, ats,role }) => {
   const [ischatting, setIschatting] = useState(false);
   const [preChat, setPreChat] = useState('');
+  const {fileName} = useProvider();
   const [chatResponse,setChatResponse] = useState(''); 
   const [message,setMessage] = useState([
     {
@@ -24,10 +27,21 @@ export const Chatbot = ({ job_role, ats }) => {
         {
             if(preChat === '')
                 {
-                    return;
+                  return;
                 }
-            setIschatting(true);
-            setMessage((prev) => [...prev,{role: "user", content: preChat}]);
+                setMessage((prev) => [...prev,{role: "user", content: preChat}]);
+
+                setIschatting(true);
+                try
+                {
+                  let res = await axios.post('http://localhost:5000/api/resume/query',{parsedText,query:preChat});
+                  console.log(res)
+                    setMessage((prev) => [...prev,{role: "system", content: res.data.response}]);
+                }
+                catch(err){
+                  console.log(err);
+                }
+                setMessage((prev) => [...prev,{role: "user", content: preChat}]);
 
         }
   return (
@@ -55,16 +69,16 @@ export const Chatbot = ({ job_role, ats }) => {
             <button onClick={(e) => setPreChat(e.target.innerText)} className="text-sm border border-gray-300 py-2 px-2 hover:border-gray-500 hover:cursor-pointer rounded-lg flex items-center gap-1">
               {" "}
               <FaChartLine className="text-gray-500 " /> How can i take my ATS
-              from to 90+
+              from {ats} to 90+
             </button>
             <button onClick={(e) => setPreChat(e.target.innerText)}  className="text-sm border border-gray-300 py-2 px-2 hover:border-gray-500 hover:cursor-pointer rounded-lg flex items-center gap-1">
               {" "}
               <FaStar className="text-gray-500 " /> What more skills should I
-              add for{" "}
+              add for {role}
             </button>
             <button onClick={(e) => setPreChat(e.target.innerText)}  className="text-sm border border-gray-300 py-2 px-2 hover:border-gray-500 hover:cursor-pointer rounded-lg flex items-center gap-1">
               {" "}
-              <FaLightbulb className="text-gray-500 " /> Where can I apply for{" "}
+              <FaLightbulb className="text-gray-500 " /> Where can I apply for {role}
             </button>
           </div>
           <div class="playground min-h-[300px]">

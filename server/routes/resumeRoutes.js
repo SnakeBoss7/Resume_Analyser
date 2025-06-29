@@ -5,6 +5,8 @@ const fs = require('fs').promises;
 const upload = require('../middleware/multer');
 const resumeMatching = require('../services/regex');
 const chat_bot = require('../services/LessToken_ai');
+
+// to upload + analyze (multer + parser + ai analyze)
 router.post('/analyze',upload.single('resume'),async (req,res)=>
     {
         console.log('reached analyzer')
@@ -19,7 +21,28 @@ router.post('/analyze',upload.single('resume'),async (req,res)=>
                 {
                 response= response.replaceAll('```json','').replaceAll('```','').trim();
                 data = JSON.parse(response);
-                res.status(200).json({status:'success',data});
+                res.status(200).json({status:'success',data,text:Resume_text});
+            })
+        }catch(err)
+        {
+            cosnole.log(err);
+            res.status(400).json({status:'failed'});
+
+        }
+    })
+
+router.post('/query',(req,res)=>
+    {
+        console.log(req.body);
+           try
+        {   // getting all the prompts ready 
+            let Resume_text = req.body.parsedText;
+            let query =  'ANSWER IN LESS THAN 50 words' + req.body.query;
+
+            chat_bot(Resume_text,query).then((response) =>
+                {
+                    console.log(response);
+                res.status(200).json({status:'success',response});
             })
         }catch(err)
         {

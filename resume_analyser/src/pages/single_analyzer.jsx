@@ -26,22 +26,24 @@ import { useProvider } from "../context/user_data";
 import { SparklesIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
 import { color } from "framer-motion";
 import { HandleUpload } from "../utils/upload";
-
+import { useNavigate } from "react-router-dom";
 export default function Single_analyzer({ user_data }) {
-  const { userData, setUserData } = useProvider();
+  const { userData, setUserData,setParsedText,parsedText} = useProvider();
   const [activeTab, setActiveTab] = useState("");
-
+  const navigate = useNavigate();
   const [mess, setMess] = useState("");
   console.log(userData);
-
+  console.log(parsedText);
    const handleFile = async (File)=>
       {
 
-        let {data,mess} = await HandleUpload(File);
+        let {data,mess,text} = await HandleUpload(File);
         if(data)
           {
             setUserData(data);
             setMess(null)
+            setParsedText(text);
+            navigate('/single_analyzer');
           }
           else
           {
@@ -405,7 +407,7 @@ export default function Single_analyzer({ user_data }) {
             </div>
 
             <div class="w-full xl:w-1/2 bg-white h-fit border border-gray-200 shadow-gray-300 shadow-xl py-5 px-5 rounded-lg flex flex-col gap-5 justify-between ">
-              <Chatbot/>
+              <Chatbot parsedText={parsedText} ats={userData.ATS_Compatibility.ATS_Score} role={userData.Best_Role_Fit.Title}/>
             </div>
           </div>
         </>

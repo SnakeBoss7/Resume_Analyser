@@ -5,11 +5,13 @@ const upload = require('./middleware/multer');
 const multer = require('multer');
 const resumeRoutes = require('./routes/resumeRoutes')
 const dotenv = require('dotenv');
+const chat_bot = require('./routes/chatBot')
 dotenv.config()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+//for upload only in future use 
 app.post('/',upload.single('resume'),(req,res)=>
     {
         
@@ -20,6 +22,8 @@ app.post('/',upload.single('resume'),(req,res)=>
         console.log('perfetct')
         res.status(200).json({ status: 'success', message: 'File uploaded successfully', file: req.file });
     })
+
+// single resume related query 
 app.use('/api/resume',resumeRoutes);
 app.use((err,req,res,next)=>
         {

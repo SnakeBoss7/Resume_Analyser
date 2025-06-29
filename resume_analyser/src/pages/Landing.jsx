@@ -33,7 +33,8 @@ const featuresData = [
 ];
 
 export default function Landing() {
-  const {userData,setUserData} = useProvider();
+  const {userData,setUserData,parsedText,setParsedText} = useProvider();
+
   const [file_name, setFile_name] = useState("");
   const [mess, setMess] = useState("");
     const navigate = useNavigate();
@@ -41,11 +42,12 @@ export default function Landing() {
     
  const HandleFile = async (File)=>
     {
-      let {data,mess} = await HandleUpload(File);
+      let {data,mess,text} = await HandleUpload(File);
       if(data)
         {
           setUserData(data);
-          setMess('')
+          setMess('');
+          setParsedText(text);
           navigate('/single_analyzer')
         }
         else
