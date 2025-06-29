@@ -4,6 +4,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import Landing from "./Landing";
 import multi_analyzer from "./multi_analyzer";
+import { Chatbot }  from "../components/chatBot/chatbot";
 import {
   FaFileAlt,
   FaHome,
@@ -18,7 +19,8 @@ import {
   FaBolt,
   FaCircle,
   FaEye,
-  FaUpload
+  FaUpload,
+  FaFacebookMessenger
 } from "react-icons/fa";
 import { useProvider } from "../context/user_data";
 import { SparklesIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
@@ -58,7 +60,7 @@ export default function Single_analyzer({ user_data }) {
       />
       {Object.keys(userData).length > 0 ? (
         <>
-          <div class="container w-full my-3 flex justify-center items-center p-3">  
+          <div class="container w-full my-3 flex justify-center items-center p-3 ">
             <div className=" flex flex-col justify-evenly h-full p-5 bg-gradient-to-r from-primary via-purple-500 to-primary_lg rounded-lg">
               <h1 className="tracking-tight text-white text-3xl font-bold">
                 Hello, {userData.Name} 👋
@@ -70,7 +72,7 @@ export default function Single_analyzer({ user_data }) {
             </div>
           </div>
 
-          <div class="stats container  mx-auto justify-evenly w-full flex flex-col xl:flex-row w-full">
+          <div class="stats container  mx-auto justify-evenly w-full gap-3 flex flex-col xl:flex-row w-full">
             {/* data */}
             <div class="left px-3 md:px-0 w-full  xl:w-1/2 flex flex-col gap-7">
               <div className="performance_dashboard bg-white  border border-gray-200 shadow-gray-300 shadow-xl py-5 px-5 rounded-lg flex flex-col gap-5 justify-between ">
@@ -385,20 +387,26 @@ export default function Single_analyzer({ user_data }) {
                   )}
                 </div>
               </div>
-                <div class="drag_drop bg-white flex flex-col flex-1 min-w-[350px] border border-gray-200 shadow-gray-300 shadow-xl py-5 px-5 rounded-lg">
-                  <h1 className="flex items-center gap-3  font-bold tracking-tight text-2xl "> <FaUpload className="text-gray-400 text-2xl" />Another One ? </h1>
-                  <FileDropzone
-                    onFileSelected={handleFile}
-                    heading=""
-                    subheading="Want to analyze a different resume?"
-                    button="Upload new resume"
-                    height="200px"
-                    width="w-full"
-                  />
-                </div>
+              <div class="drag_drop bg-white flex flex-col flex-1 min-w-[350px] border border-gray-200 shadow-gray-300 shadow-xl py-5 px-5 rounded-lg">
+                <h1 className="flex items-center gap-3  font-bold tracking-tight text-2xl ">
+                  {" "}
+                  <FaUpload className="text-gray-400 text-2xl" />
+                  Another One ?{" "}
+                </h1>
+                <FileDropzone
+                  onFileSelected={handleFile}
+                  heading=""
+                  subheading="Want to analyze a different resume?"
+                  button="Upload new resume"
+                  height="200px"
+                  width="w-full"
+                />
+              </div>
             </div>
 
-            <div class="w-full md:w-1/2"></div>
+            <div class="w-full md:w-1/2 bg-white h-fit border border-gray-200 shadow-gray-300 shadow-xl py-5 px-5 rounded-lg flex flex-col gap-5 justify-between ">
+              <Chatbot/>
+            </div>
           </div>
         </>
       ) : (
