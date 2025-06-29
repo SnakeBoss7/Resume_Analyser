@@ -404,7 +404,7 @@ export default function Single_analyzer({ user_data }) {
               </div>
             </div>
 
-            <div class="w-full md:w-1/2 bg-white h-fit border border-gray-200 shadow-gray-300 shadow-xl py-5 px-5 rounded-lg flex flex-col gap-5 justify-between ">
+            <div class="w-full xl:w-1/2 bg-white h-fit border border-gray-200 shadow-gray-300 shadow-xl py-5 px-5 rounded-lg flex flex-col gap-5 justify-between ">
               <Chatbot/>
             </div>
           </div>
