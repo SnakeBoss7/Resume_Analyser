@@ -7,42 +7,51 @@ import {
   FaChartLine,
 } from "react-icons/fa";
 import axios from "axios";
+import Loader from "../loader/small_laoder";
 import React, { useState } from "react";
 import { useProvider } from "../../context/user_data";
 export const Chatbot = ({ parsedText, ats,role }) => {
   const [ischatting, setIschatting] = useState(false);
   const [preChat, setPreChat] = useState('');
+  const [chatIncoming, setChatIncoming] = useState(true);
   const {fileName} = useProvider();
   const [chatResponse,setChatResponse] = useState(''); 
   const [message,setMessage] = useState([
     {
-        role: "user",
-        content: "are you oke",
-    },
+      role: "user",
+      content: `yooooooo beyach`,
+    }
+    ,
+        {
+      role: "system",
+      content: `Welcome to AI Carrer Coach, ${fileName}! I'm here to help you analyze your resume and provide you with personalized advice based on your skills and experience.`,
+    }
+  ]);
+  const delay_funt = async () =>
     {
-        role: "system",
-        content: "yes completely fine mf",
-    }]);
+      return new Promise((resolve) => {
+      setTimeout(resolve, 10000);})
+    }
     const handleChat = async()=>
         {
             if(preChat === '')
                 {
                   return;
                 }
+                setChatIncoming(true);
                 setMessage((prev) => [...prev,{role: "user", content: preChat}]);
-
+                setPreChat('');
                 setIschatting(true);
                 try
                 {
                   let res = await axios.post('http://localhost:5000/api/resume/query',{parsedText,query:preChat});
                   console.log(res)
+                  setChatIncoming(false);
                     setMessage((prev) => [...prev,{role: "system", content: res.data.response}]);
                 }
                 catch(err){
                   console.log(err);
                 }
-                setMessage((prev) => [...prev,{role: "user", content: preChat}]);
-
         }
   return (
     <div class="contain w-full">
@@ -87,7 +96,7 @@ export const Chatbot = ({ parsedText, ats,role }) => {
         </>
       ) : (
         <>
-          <div class="playground min-h-[300px] w-full">
+          <div class="playground min-h-[300px] w-full max-h-[500px] overflow-scroll">
             {message && 
             <>
                 {message.map((mess,i)=>
@@ -100,9 +109,9 @@ export const Chatbot = ({ parsedText, ats,role }) => {
                         }`}
                       >
                         <div
-                          className={`message  tracking-tight text-[15px] font-[600] p-4  rounded-xl  ${
+                          className={`message mb-5 tracking-tight text-[15px] font-[500] p-3  rounded-xl  ${
                             mess.role === "user"
-                              ? "text-end bg-gradient-to-r from-purple-500 via-primary_lg  to-primary text-white"
+                              ? "text-end bg-gradient-to-r from-primary via-blue-600 to-purple-600 text-white"
                               : "text-start bg-primary text-white "
                           } `}
                         >
@@ -112,6 +121,12 @@ export const Chatbot = ({ parsedText, ats,role }) => {
                     );
                 })}
             </>}
+            //loader for chat if incoming
+                    {chatIncoming && 
+                      <div className="text-start bg-primary w-fit text-white message  tracking-tight text-[15px] font-[600] px-8  py-2 rounded-xl">
+                        <Loader/>
+                      </div>
+                    }
           </div>
         </>
       )}

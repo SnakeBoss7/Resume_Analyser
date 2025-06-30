@@ -5,6 +5,7 @@ const fs = require('fs').promises;
 const upload = require('../middleware/multer');
 const resumeMatching = require('../services/regex');
 const chat_bot = require('../services/LessToken_ai');
+const exp_chat_bot = require('../services/highToken_ai')
 
 // to upload + analyze (multer + parser + ai analyze)
 router.post('/analyze',upload.single('resume'),async (req,res)=>
@@ -37,9 +38,9 @@ router.post('/query',(req,res)=>
            try
         {   // getting all the prompts ready 
             let Resume_text = req.body.parsedText;
-            let query =  'ANSWER IN LESS THAN 50 words' + req.body.query;
+            let query =  'STRICTLY ANSWER IN LESS THAN 50 words NO MORE !!!!' + req.body.query;
 
-            chat_bot(Resume_text,query).then((response) =>
+            exp_chat_bot(Resume_text,query).then((response) =>
                 {
                     console.log(response);
                 res.status(200).json({status:'success',response});
