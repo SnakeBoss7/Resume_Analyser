@@ -9,6 +9,7 @@ import Landing from "./pages/Landing";
 import MultiAnalyzer from "./pages/multi_analyzer";
 import SingleAnalyzer from "./pages/single_analyzer";
 
+const apiUrl = process.env.REACT_APP_API_URL;
 
 function App() {
   const [file_name, setFile_name] = useState("");
@@ -16,7 +17,6 @@ function App() {
   const handleUpload = async (File) => {
     let formData = new FormData();
     formData.append("resume", File);
-
     await axios
       .post("http://localhost:5000/", formData)
       .then((Response) => {
@@ -31,7 +31,7 @@ function App() {
     console.log(file_name);
     e.preventDefault();
     await axios
-      .post("http://localhost:5000/api/resume/analyze", { filename: file_name })
+      .post(`${apiUrl}/api/resume/analyze`, { filename: file_name })
       .then((Response) => {
         // If you want to display the parsed data:
         setMess("Analysis complete!");

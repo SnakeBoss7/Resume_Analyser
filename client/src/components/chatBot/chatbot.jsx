@@ -10,6 +10,8 @@ import axios from "axios";
 import Loader from "../loader/small_laoder";
 import React, { useState } from "react";
 import { useProvider } from "../../context/user_data";
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export const Chatbot = ({ parsedText, ats,role }) => {
   const [ischatting, setIschatting] = useState(false);
   const [preChat, setPreChat] = useState('');
@@ -44,7 +46,7 @@ export const Chatbot = ({ parsedText, ats,role }) => {
                 setIschatting(true);
                 try
                 {
-                  let res = await axios.post('http://localhost:5000/api/resume/query',{parsedText,query:preChat});
+                  let res = await axios.post(`${apiUrl}/api/resume/query`,{parsedText,query:preChat});
                   console.log(res)
                   setChatIncoming(false);
                     setMessage((prev) => [...prev,{role: "system", content: res.data.response}]);

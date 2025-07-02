@@ -1,4 +1,5 @@
 import axios from "axios";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -10,7 +11,7 @@ function delay(ms) {
       formdata.append("resume", File);
       
       try{
-        let res = await axios.post('http://localhost:5000/api/resume/analyze',formdata)
+        let res = await axios.post(`${apiUrl}/api/resume/analyze`,formdata)
         
         // await delay(1000);
 

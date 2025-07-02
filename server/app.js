@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
 const upload = require('./middleware/multer');
 const multer = require('multer');
 const resumeRoutes = require('./routes/resumeRoutes')
@@ -10,7 +9,18 @@ dotenv.config()
 const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+
+const cors = require('cors');
+
+const allowedOrigins = [
+  'http://localhost:3000', // for dev
+  'https://your-frontend.vercel.app', // for prod
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true, // only if you use cookies or auth headers
+}));
 //for upload only in future use 
 app.post('/',upload.single('resume'),(req,res)=>
     {
