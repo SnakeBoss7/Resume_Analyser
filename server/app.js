@@ -14,7 +14,7 @@ const cors = require('cors');
 
 const allowedOrigins = [
   'http://localhost:3000', // for dev
-  'https://your-frontend.vercel.app', // for prod
+  'https://resume-analyser-dv83.vercel.app/', // for prod
 ];
 
 app.use(cors({
