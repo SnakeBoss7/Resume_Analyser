@@ -7,7 +7,7 @@ const resumeRoutes = require('./routes/resumeRoutes')
 const dotenv = require('dotenv');
 const chat_bot = require('./routes/chatBot')
 dotenv.config()
-
+const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -33,7 +33,7 @@ app.use((err,req,res,next)=>
                     res.status(400).json({status:'error', message:'unsupported file'});
                 }
 })
-    app.listen(process.env.PORT, (err) => {
+    app.listen(PORT, (err) => {
         if (err) {
         console.error('Error starting the server:', err);
         return
