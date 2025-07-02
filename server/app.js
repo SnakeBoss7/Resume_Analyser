@@ -13,13 +13,13 @@ app.use(express.urlencoded({ extended: true }));
 const cors = require('cors');
 
 const allowedOrigins = [
-  'http://localhost:3000', // for dev
-  'https://resume-analyser-dv83.vercel.app/', // for prod
+  'http://localhost:3000',
+  'https://resume-analyser-dv83.vercel.app', // <-- remove trailing slash
 ];
 
 app.use(cors({
   origin: allowedOrigins,
-  credentials: true, // only if you use cookies or auth headers
+  credentials: true,
 }));
 //for upload only in future use 
 app.post('/',upload.single('resume'),(req,res)=>
