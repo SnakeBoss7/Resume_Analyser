@@ -33,7 +33,7 @@ app.use((err,req,res,next)=>
                     res.status(400).json({status:'error', message:'unsupported file'});
                 }
 })
-    app.listen(5000, (err) => {
+    app.listen(process.env.PORT, (err) => {
         if (err) {
         console.error('Error starting the server:', err);
         return
