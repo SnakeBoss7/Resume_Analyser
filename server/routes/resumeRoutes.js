@@ -10,6 +10,11 @@ const exp_chat_bot = require('../services/highToken_ai')
 // to upload + analyze (multer + parser + ai analyze)
 router.post('/analyze',upload.single('resume'),async (req,res)=>
     {
+        if (!req.file) {
+            console.log('No file uploaded');
+            return res.status(400).json({ status: 'error', message: 'No file uploaded' });
+        }  
+        console.log('File received:', req.file.filename);
         console.log('reached analyzer')
         try
         {   // getting all the prompts ready 
@@ -26,7 +31,7 @@ router.post('/analyze',upload.single('resume'),async (req,res)=>
             })
         }catch(err)
         {
-            cosnole.log(err);
+            console.log(err);
             res.status(400).json({status:'failed'});
 
         }

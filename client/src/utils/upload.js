@@ -15,7 +15,10 @@ function delay(ms) {
         let res = await axios.post(`${apiUrl}api/resume/analyze`,formdata)
         
         // await delay(1000);
-
+        if(res.data.message)
+          {
+            console.log(res.data.message);
+          }
         return {data:res.data.data,error:null,text:res.data.text};
       }
       catch(err)

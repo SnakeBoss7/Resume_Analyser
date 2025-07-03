@@ -34,6 +34,7 @@ app.post('/',upload.single('resume'),(req,res)=>
 app.use('/api/resume',resumeRoutes);
 app.use((err,req,res,next)=>
         {
+            
             if(err instanceof multer.MulterError || err.message === 'Unsupported File Type')
                 {
                     console.log('middleware ran')
