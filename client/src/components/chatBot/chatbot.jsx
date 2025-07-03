@@ -46,7 +46,7 @@ export const Chatbot = ({ parsedText, ats,role }) => {
                 setIschatting(true);
                 try
                 {
-                  let res = await axios.post(`${apiUrl}/api/resume/query`,{parsedText,query:preChat});
+                  let res = await axios.post(`${apiUrl}api/resume/query`,{parsedText,query:preChat});
                   console.log(res)
                   setChatIncoming(false);
                     setMessage((prev) => [...prev,{role: "system", content: res.data.response}]);
