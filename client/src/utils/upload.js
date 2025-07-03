@@ -11,6 +11,7 @@ function delay(ms) {
       formdata.append("resume", File);
       
       try{
+        console.log('calling : '+ apiUrl);
         let res = await axios.post(`${apiUrl}api/resume/analyze`,formdata)
         
         // await delay(1000);
