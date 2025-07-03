@@ -14,10 +14,13 @@ const cors = require('cors');
 
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://resume-analyser-dv83.vercel.app', // <-- remove trailing slash
+  'https://resume-analyser-dv83.vercel.app', // your Vercel frontend
 ];
 
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 //for upload only in future use 
 app.post('/',upload.single('resume'),(req,res)=>
     {

@@ -1,5 +1,6 @@
 import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL;
+// const locUrl = process.env.REACT_APP_LOC_URL;
 
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -12,7 +13,8 @@ function delay(ms) {
       
       try{
         console.log('calling : '+ apiUrl);
-        let res = await axios.post(`${apiUrl}api/resume/analyze`,formdata)
+        // console.log('calling : '+ locUrl);
+        let res = await axios.post(`${apiUrl}/api/resume/analyze`,formdata)
         
         // await delay(1000);
         if(res.data.message)

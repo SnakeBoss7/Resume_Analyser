@@ -4,7 +4,7 @@ const pdf = require('pdf-parse');
 const Tesseract = require('tesseract.js');
 
 const parser = async (filename) => {
-    const file_path = `/home/snake/Workspace/WEB/Projects/Resume_Analyser/server/uploads/${filename}`;
+    const file_path = `./uploads/${filename}`;
     const { fileTypeFromBuffer } = await import('file-type');
     const buffer = fs.readFileSync(file_path);
     const file_type = await fileTypeFromBuffer(buffer);
