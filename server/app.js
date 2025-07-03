@@ -17,10 +17,7 @@ const allowedOrigins = [
   'https://resume-analyser-dv83.vercel.app', // <-- remove trailing slash
 ];
 
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
-}));
+app.use(cors());
 //for upload only in future use 
 app.post('/',upload.single('resume'),(req,res)=>
     {
