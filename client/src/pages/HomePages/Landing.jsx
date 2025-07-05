@@ -61,7 +61,7 @@ export default function Landing() {
   return (
     <div
       className=" flex flex-col gap-10 items-center"
-      style={{ backgroundColor:"rgb(239 245 252)" }}
+      style={{ backgroundColor:"#E9EEF4" }}
     >
       {/* Header section  */}
       <Header
@@ -103,18 +103,18 @@ export default function Landing() {
       </div>
 
       {/* Message section  */}
-      <div className="mb-10 mt-10 message flex flex-col items-center w-full">
+      <div className=" mt-10 message flex flex-col items-center w-full">
         <div className="message_content text-center text-sm font-normal text-gray-600  tracking-tight">
-          <h1 className="text-4xl mb-10 mt-10 font-bold text-black tracking-tight">
+          <h1 className="text-4xl mb-2 mt-10 font-extrabold px-3 text-black tracking-tight">
             Everything you need to optimize resumes
           </h1>
-          <p className="text-xl mb-10  text-gray-500 tracking-tight ">
+          <p className="lg:text-xl text-lg px-5 text-gray-500 tracking-tight ">
             Our AI-powered platform provides comprehensive resume analysis for
             both job seekers and HR professionals.
           </p>
         </div>
       </div>
-      <div className="features gap-2 m-auto flex flex-col md:flex-row  justify-between items-center px-5 ">
+      <div className="bg-[#f0f4fa] flex flex-wrap justify-center px-5 py-10 ">
         {featuresData.map((feature, idx) => (
           <Features
             key={idx}

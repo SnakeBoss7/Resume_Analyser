@@ -4,6 +4,7 @@ import {
   NewspaperIcon,
   AdjustmentsHorizontalIcon,
   UserGroupIcon,
+  ChatBubbleBottomCenterIcon
 } from '@heroicons/react/24/solid';
 
 const iconMap = {
@@ -11,6 +12,8 @@ const iconMap = {
   NewspaperIcon,
   AdjustmentsHorizontalIcon,
   UserGroupIcon,
+  ChatBubbleBottomCenterIcon
+  
 };
 
 export default iconMap;

@@ -41,10 +41,10 @@ export const ResumeBuilder = () => {
         icons={[FaHome, FaFileAlt, FaUsers, FaMagic]}
       />
       <FaMagic className="mt-20 h-[70px] w-[70px] rounded-3xl bg-gradient-to-r from-primary to-purple-500 text-white p-5" />
-      <h1 className="text-center lg:text-7xl text-4xl font-bold mt-5 font-extrabold text-zinc-900 tracking-tight">
+      <h1 className="text-center lg:text-7xl px-5 text-4xl font-bold mt-5 font-extrabold text-zinc-900 tracking-tight">
         AI-Powered Resume Builder
       </h1>
-      <p className="text-center my-5 lg:text-2xl text-xl text-gray-600 tracking-tight lg:mx-[300px] mx-1 font-bold">
+      <p className="text-center my-5 px-7 lg:text-2xl text-lg text-gray-600 tracking-tight lg:mx-[300px] mx-1 font-bold">
         Create, enhance, or analyze your resume with cutting-edge AI technology.
         Get personalized suggestions and real-time feedback to land your dream
         job
@@ -82,21 +82,20 @@ export const ResumeBuilder = () => {
 
    <div className="mb-10 px-5 starters items-center flex flex-col lg:flex-row gap-5 lg:px-32 justify-center">
   {/* Left Card */}
-  <div className="rounded-2xl w-[300px] h-[550px] pack py-10 px-5 flex flex-col gap-7 items-center shadow-xl hover:-translate-y-2 hover:shadow-gray-400 transition-all ease-in-out duration-400 bg-white">
+  <div className="rounded-2xl w-[300px] h-[550px] pack py-6 px-5 flex flex-col gap-7 items-center shadow-xl hover:-translate-y-2 hover:shadow-gray-400 transition-all ease-in-out duration-400 bg-white">
     <div className="text-white bg-primary p-4 rounded-2xl h-[60px] w-[60px] flex justify-center items-center">
       <FaPlus className="h-7 w-7 text-center" />
     </div>
     <div className="heading w-full">
-      <h2 className="text-3xl mb-3 text-center font-bold tracking-tight">Create From scratch</h2>
+      <h2 className="text-3xl mb-2 text-center font-bold tracking-tight">Create From scratch</h2>
       <p className="text-center text-gray-500 font-bold tracking-tight text-md">
-        Build a professional resume from the ground up with our AI-powered builder
+        Build a professional resume from the ground up with our AI-powers
       </p>
     </div>
     {[
       'AI-powered content suggestion',
       'Professional templates',
       'Real-Time ATS scoring',
-      'Industry-specific guidance',
       'Export in Multiple formats'
     ].map((text, i) => (
       <div key={i} className="flex items-center gap-3 text-gray-900 tracking-tight text-zinc-800 text-left font-bold text-md w-full">
@@ -104,13 +103,13 @@ export const ResumeBuilder = () => {
         <span>{text}</span>
       </div>
     ))}
-    <div className="flex w-4/5 h-[55px] mt-5 justify-center gap-5 p-5 bg-primary text-white text-xl font-bold tracking-tight items-center rounded-xl button">
+    <div className="flex w-4/5 h-[55px] justify-center gap-5 p-5 bg-primary text-white text-xl font-bold tracking-tight items-center rounded-xl button">
       Get Started <FaArrowRight />
     </div>
   </div>
 
   {/* Center Card (Bigger) */}
-  <div className="rounded-2xl w-[350px] h-[600px] pack py-10 px-5 flex flex-col gap-7 items-center shadow-xl hover:-translate-y-2 hover:shadow-gray-400 transition-all ease-in-out duration-400 bg-white">
+  <div className="rounded-2xl w-[350px] h-[600px] pack py-6 px-5 flex flex-col gap-7 items-center shadow-xl hover:-translate-y-2 hover:shadow-gray-400 transition-all ease-in-out duration-400 bg-white">
     <div className="text-white bg-green-600 p-4 rounded-2xl h-[60px] w-[60px] flex justify-center items-center">
       <FaMagic className="h-7 w-7 text-center" />
     </div>
@@ -121,10 +120,10 @@ export const ResumeBuilder = () => {
       </p>
     </div>
     {[
-      'AI-powered content suggestion',
-      'Professional templates',
-      'Real-Time ATS scoring',
-      'Industry-specific guidance',
+      'Side-by-side comparison',
+      'Section-by-section improvements',
+      'Accept/decline suggestions',
+      'Instant preview',
       'Export in Multiple formats'
     ].map((text, i) => (
       <div key={i} className="flex items-center gap-3 text-gray-900 tracking-tight text-zinc-800 text-left font-bold text-md w-full">
@@ -132,35 +131,34 @@ export const ResumeBuilder = () => {
         <span>{text}</span>
       </div>
     ))}
-    <div className="flex w-4/5 h-[55px] mt-5 justify-center gap-5 p-5 bg-green-600 text-white text-xl font-bold tracking-tight items-center rounded-xl button">
+    <div className="flex w-4/5 h-[55px]  justify-center gap-5 p-5 bg-green-600 text-white text-xl font-bold tracking-tight items-center rounded-xl button">
       Get Started <FaArrowRight />
     </div>
   </div>
 
   {/* Right Card */}
-  <div className="rounded-2xl w-[300px] h-[550px] pack py-10 px-5 flex flex-col gap-7 items-center shadow-xl hover:-translate-y-2 hover:shadow-gray-400 transition-all ease-in-out duration-400 bg-white">
+  <div className="rounded-2xl w-[300px] h-[550px] pack py-6 px-5 flex flex-col gap-7 items-center shadow-xl hover:-translate-y-2 hover:shadow-gray-400 transition-all ease-in-out duration-400 bg-white">
     <div className="text-white bg-purple-600 p-4 rounded-2xl h-[60px] w-[60px] flex justify-center items-center">
       <FaUpload className="h-7 w-7 text-center" />
     </div>
     <div className="heading">
-      <h2 className="text-3xl mb-3 text-center font-bold tracking-tight">Analyze & Score</h2>
+      <h2 className="text-3xl mb-2 text-center font-bold tracking-tight">Analyze & Score</h2>
       <p className="text-center text-gray-500 font-bold tracking-tight text-md">
         Upload your resume for detailed analysis, ATS scoring, and improvement recommendations
       </p>
     </div>
     {[
-      'AI-powered content suggestion',
-      'Professional templates',
-      'Real-Time ATS scoring',
-      'Industry-specific guidance',
-      'Export in Multiple formats'
+      'Comprehensive analysis',
+      'ATS compatibility score',
+      'Keyword optimization',
+      'Actionable feedback',
     ].map((text, i) => (
       <div key={i} className="flex items-center gap-3 text-gray-900 tracking-tight text-zinc-800 text-left font-bold text-md w-full">
         <FaCheckCircle className="text-yellow-500 w-5 h-5 flex-shrink-0" />
         <span>{text}</span>
       </div>
     ))}
-    <div className="flex w-4/5 h-[55px] mt-5 justify-center gap-5 p-5 bg-purple-600 text-white text-xl font-bold tracking-tight items-center rounded-xl button">
+    <div className="flex w-4/5 h-[55px]  justify-center gap-5 p-5 bg-purple-600 text-white text-xl font-bold tracking-tight items-center rounded-xl button">
       Get Started <FaArrowRight />
     </div>
   </div>

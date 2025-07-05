@@ -21,13 +21,37 @@ import {
   FaEye,
   FaUpload,
   FaFacebookMessenger,
-  FaMagic
+  FaMagic,
 } from "react-icons/fa";
 import { useProvider } from "../../context/user_data";
 import { SparklesIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
 import { color } from "framer-motion";
 import { HandleUpload } from "../../utils/upload";
 import { useNavigate } from "react-router-dom";
+import Features from "../../components/features";
+import iconMap from "../../icons/icon"; 
+const featuresData = [
+  {
+    icon: 'NewspaperIcon',
+    title: 'Smart Resume Analysis',
+    bg_col:'bg-blue-500',
+    description: 'Get detailed insights on resume structure, keywords, and ATS compatibility with our advanced AI engine.',
+    
+  },
+  {
+    icon: 'AdjustmentsVerticalIcon',
+    title: 'Job Fit Scoring',
+    bg_col:'bg-purple-500',
+    description: 'Discover the best role matches and get personalized recommendations to improve your job fit score.',
+  },
+  {
+    icon: 'ChatBubbleBottomCenterIcon',
+    title: 'AI Career Coach',
+    bg_col:'bg-green-500',
+    description: 'Chat with AI int the playground to get personalized career advice and resume tips',
+  },
+
+];
 export default function Single_analyzer({ user_data }) {
   const { userData, setUserData,setParsedText,parsedText} = useProvider();
   const [activeTab, setActiveTab] = useState("");
@@ -55,7 +79,7 @@ export default function Single_analyzer({ user_data }) {
       }
   
   return (
-    <div className="bg-#E5EBF2-100" style={{ backgroundColor: "#E5EBF2" }}>
+    <div className="bg-#E5EBF2-100" style={{ backgroundColor: "#E9EEF4" }}>
       <Header
         pages={["Home", "single Analyzer", "HR dashboard", "Resume Builder"]}
         links={["", "single_analyzer", "Hr_dashboard","ResumeBuilder"]}
@@ -413,8 +437,34 @@ export default function Single_analyzer({ user_data }) {
           </div>
         </>
       ) : (
-        <></>
-      )}
+        <div className="flex flex-col w-full items-center">
+          <h1 className="lg:text-5xl text-4xl font-extrabold mt-10 text-center">AI Resume Analyzer</h1>
+          <p className="lg:text-xl text-lg my-4 text-gray-700 lg:px-32 px-5 text-center">Upload your resume to get instant AI-powered insights, ATS scoring, and personalized improvement suggestions powered by Lama AI.</p>
+          {/* Dropper  */}
+                  <div className="file_upload mb-7 md:w-[500px] w-[90%] flex justify-center items-center">
+                    <FileDropzone
+                      onFileSelected={handleFile}
+                      heading="Upload your resume"
+                      subheading="Drag and drop your resume file here or click to select"
+                      button="Choose file"
+                      height="400px"
+                      width="w-full"
+                    />
+                  </div>
+                   <div className="bg-[#f0f4fa] flex flex-wrap justify-center px-5 py-10 ">
+                          {featuresData.map((feature, idx) => (
+                            <Features
+                              key={idx}
+                              bgColor={feature.bg_col}
+                              Icon={iconMap[feature.icon]} // dynamically maps string to component
+                              title={feature.title}
+                              description={feature.description}
+                            />
+                          ))}
+                        </div>
+        </div>
+      )
+      }
 
       <Footer />
     </div>
