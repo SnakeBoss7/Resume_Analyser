@@ -5,10 +5,11 @@ import FileDropzone from "../../components/FileDropzone";
 import Features from "../../components/features";
 import iconMap from "../../icons/icon"; 
 import Header from "../../components/Header/header";
-import { FaArrowRight,FaFileAlt,FaUsers } from "react-icons/fa";
+import { FaArrowRight,FaFileAlt,FaMagic,FaUsers } from "react-icons/fa";
 import { useProvider } from '../../context/user_data';
 import { HandleUpload } from "../../utils/upload";
 import { useNavigate } from "react-router-dom";
+
 const featuresData = [
   {
     icon: 'NewspaperIcon',
@@ -60,13 +61,13 @@ export default function Landing() {
   return (
     <div
       className=" flex flex-col gap-10 items-center"
-      style={{ backgroundColor: "#E5EBF2" }}
+      style={{ backgroundColor:"rgb(239 245 252)" }}
     >
       {/* Header section  */}
       <Header
-        pages={["Resmue analyzer", "Hr Dashboard"]}
-        links={["single_analyzer", "Hr_dashboard"]}
-        icons={[FaFileAlt, FaUsers]}
+        pages={["Resmue analyzer", "Hr Dashboard", "Resume Builder"]}
+        links={["single_analyzer", "Hr_dashboard", "ResumeBuilder"]}
+        icons={[FaFileAlt, FaUsers,FaMagic]}
       />
       {/* Theme toggle button  */}
       {/* Hero section  */}
@@ -94,7 +95,7 @@ export default function Landing() {
             onFileSelected={HandleFile}
             heading="Upload your resume"
             subheading="Drag and drop your resume file here or click to select"
-            button='Choose file'
+            button="Choose file"
             height="350px"
             width="w-full"
           />
@@ -126,7 +127,7 @@ export default function Landing() {
       </div>
 
       {/* Analyse redirection section  */}
-      <div className=" px-5  mx-auto md:container md:p-0 w-full" >
+      <div className=" px-5  mx-auto md:container md:p-0 w-full">
         <div class="box h-[300px] flex flex-col p-5 items-center justify-evenly w-full  bg-gradient-to-r from-primary via-primary_lg to-purple-500 text-white font-normal tracking-tight  rounded-xl">
           <div class="textual_dta">
             <h1 className="md:text-4xl text-3xl text-center font-extrabold ">
@@ -142,8 +143,6 @@ export default function Landing() {
           </button>
         </div>
       </div>
-
-
 
       {/* Footer section  */}
       <Footer />

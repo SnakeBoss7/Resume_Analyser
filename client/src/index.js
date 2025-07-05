@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './App.css'
 import { ResumeProvider } from './context/user_data';
+import { BrowserRouter } from 'react-router-dom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <BrowserRouter>
     <ResumeProvider>
     <App />
     </ResumeProvider>
+    </BrowserRouter>
 
   </React.StrictMode>
 );

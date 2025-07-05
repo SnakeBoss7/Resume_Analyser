@@ -20,7 +20,8 @@ import {
   FaCircle,
   FaEye,
   FaUpload,
-  FaFacebookMessenger
+  FaFacebookMessenger,
+  FaMagic
 } from "react-icons/fa";
 import { useProvider } from "../../context/user_data";
 import { SparklesIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
@@ -56,9 +57,9 @@ export default function Single_analyzer({ user_data }) {
   return (
     <div className="bg-#E5EBF2-100" style={{ backgroundColor: "#E5EBF2" }}>
       <Header
-        pages={["Home", "single Analyzer", "HR dashboard"]}
-        links={["", "single_analyzer", "Hr_dashboard"]}
-        icons={[FaHome, FaFileAlt, FaUsers]}
+        pages={["Home", "single Analyzer", "HR dashboard", "Resume Builder"]}
+        links={["", "single_analyzer", "Hr_dashboard","ResumeBuilder"]}
+        icons={[FaHome, FaFileAlt, FaUsers,FaMagic]}
       />
       {Object.keys(userData).length > 0 ? (
         <>
