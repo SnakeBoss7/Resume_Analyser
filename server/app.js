@@ -1,26 +1,33 @@
 const express = require('express');
 const app = express();
-const upload = require('./middleware/multer');
+
+//middleware
 const multer = require('multer');
+const upload = require('./middleware/multer');
+
+//routes
 const resumeRoutes = require('./routes/resumeRoutes')
+const authRoutes = require('./routes/authRoute')
 const dotenv = require('dotenv');
-const chat_bot = require('./routes/chatBot')
 dotenv.config()
 const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const cors = require('cors');
 
+// CORS 
+const cors = require('cors');
 const allowedOrigins = [
   'http://localhost:3000',
   'https://resume-analyser-dv83.vercel.app', // your Vercel frontend
 ];
-
 app.use(cors({
   origin: allowedOrigins,
   credentials: true,
 }));
+
+// {Routes usage}
+
 //for upload only in future use 
 app.post('/',upload.single('resume'),(req,res)=>
     {
@@ -35,6 +42,8 @@ app.post('/',upload.single('resume'),(req,res)=>
 
 // single resume related query 
 app.use('/api/resume',resumeRoutes);
+// auth {sign In}
+app.use('/api/auth',authRoutes)
 app.use((err,req,res,next)=>
         {
             
@@ -44,6 +53,8 @@ app.use((err,req,res,next)=>
                     res.status(400).json({status:'error', message:'unsupported file'});
                 }
 })
+
+// listing the PORT 
     app.listen(PORT, (err) => {
         if (err) {
         console.error('Error starting the server:', err);

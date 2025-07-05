@@ -1,49 +1,15 @@
 import "./App.css";
-import { useState } from "react";
-import axios from "axios";
-import FileDropzone from "./components/FileDropzone";
 import "./index.css";
 import './global.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Landing from "./pages/Landing";
-import MultiAnalyzer from "./pages/multi_analyzer";
-import SingleAnalyzer from "./pages/single_analyzer";
-
+import Landing from "./pages/HomePages/Landing";
+import MultiAnalyzer from "./pages/HomePages/multi_analyzer";
+import SingleAnalyzer from "./pages/HomePages/single_analyzer";
+import { SigIn } from "./pages/Auth/signIn";
+import { LogIn } from "./pages/Auth/login";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 function App() {
-  const [file_name, setFile_name] = useState("");
-  const [mess, setMess] = useState("");
-  const handleUpload = async (File) => {
-    let formData = new FormData();
-    formData.append("resume", File);
-    await axios
-      .post("http://localhost:5000/", formData)
-      .then((Response) => {
-        setFile_name(Response.data.file.filename);
-        setMess(Response.data.message);
-      })
-      .catch((err) => {
-        setMess("Unable to upload file : " + err.response.data.message);
-      });
-  };
-  const handleConsole = async (e) => {
-    console.log(file_name);
-    e.preventDefault();
-    await axios
-      .post(`${apiUrl}/api/resume/analyze`, { filename: file_name })
-      .then((Response) => {
-        // If you want to display the parsed data:
-        setMess("Analysis complete!");
-        console.log("Analysis result:", Response.data.data); // This is your parsed resume text
-      })
-      .catch((err) => {
-        setMess(
-          "Unable to analyze file : " +
-            (err.response?.data?.message || err.message)
-        );
-      });
-  };
   return (
     <Router>
       <Routes>
@@ -51,6 +17,8 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/Single_analyzer" element={<SingleAnalyzer />} />
           <Route path="/hr_dashboard" element={<MultiAnalyzer />} />
+          <Route path="/signIn" element={<SigIn />} />
+          <Route path="/logIn" element={<LogIn />} />
      
       </Routes>
     </Router>
