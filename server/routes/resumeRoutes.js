@@ -5,7 +5,7 @@ const fs = require('fs').promises;
 const upload = require('../middleware/multer');
 const resumeMatching = require('../services/regex');
 const chat_bot = require('../services/LessToken_ai');
-const exp_chat_bot = require('../services/highToken_ai')
+const fast_chat_bot = require('../services/highToken_ai')
 
 // to upload + analyze (multer + parser + ai analyze)
 router.post('/analyze',upload.single('resume'),async (req,res)=>
@@ -43,14 +43,16 @@ console.log('Files:', req.files);
 
 router.post('/query',(req,res)=>
     {
+        console.log('reached route');
         console.log(req.body);
            try
         {   // getting all the prompts ready 
-            let Resume_text = req.body.parsedText;
-            let query =  'STRICTLY ANSWER IN LESS THAN 50 words NO MORE !!!!' + req.body.query;
+            let Resume_text = 'you have been provided resume below  based on the resume the user will asks questions answer him properly and  STRICTLY ANSWER IN LESS THAN 50 words NO MORE !!!! \n'+ req.body.parsedText + '\n STRICTLY ANSWER IN LESS THAN 50 words NO MORE !!!!';
+            let query = req.body.query;
 
-            exp_chat_bot(Resume_text,query).then((response) =>
+            fast_chat_bot(Resume_text,query).then((response) =>
                 {
+                    // response =  response.replace(/\n/g, '<br />')
                     console.log(response);
                 res.status(200).json({status:'success',response});
             })
@@ -58,7 +60,6 @@ router.post('/query',(req,res)=>
         {
             cosnole.log(err);
             res.status(400).json({status:'failed'});
-
         }
     })
 

@@ -14,6 +14,6 @@ const ResumeProvider =({children})=>
         );
     }
 
-const useProvider =()=> useContext(ResumeContext);
+const useResumeProvider =()=> useContext(ResumeContext);
 
-export {useProvider, ResumeProvider};
+export {useResumeProvider, ResumeProvider};

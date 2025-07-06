@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import FileDropzone from "../../components/FileDropzone";
 import Header from "../../components/Header/header";
 import Footer from "../../components/Footer/footer";
-import Landing from "./Landing";
-import multi_analyzer from "./multi_analyzer";
+import Landing from "../Home/Landing";
+import multi_analyzer from "../Hr dashboard/multi_analyzer";
 import { Chatbot }  from "../../components/chatBot/chatbot";
 import {
   FaFileAlt,
@@ -23,7 +23,7 @@ import {
   FaFacebookMessenger,
   FaMagic,
 } from "react-icons/fa";
-import { useProvider } from "../../context/user_data";
+import { useResumeProvider } from "../../context/ResumeDataContext";
 import { SparklesIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
 import { color } from "framer-motion";
 import { HandleUpload } from "../../utils/upload";
@@ -53,7 +53,7 @@ const featuresData = [
 
 ];
 export default function Single_analyzer({ user_data }) {
-  const { userData, setUserData,setParsedText,parsedText} = useProvider();
+  const { userData, setUserData,setParsedText,parsedText} = useResumeProvider();
   const [activeTab, setActiveTab] = useState("");
   const navigate = useNavigate();
   const [mess, setMess] = useState("");
@@ -85,7 +85,7 @@ export default function Single_analyzer({ user_data }) {
         links={["", "single_analyzer", "Hr_dashboard","ResumeBuilder"]}
         icons={[FaHome, FaFileAlt, FaUsers,FaMagic]}
       />
-      {Object.keys(userData).length > 0 ? (
+      {Object.keys(userData || {}).length > 0 ? (
         <>
           <div class="w-full flex h-[200px] justify-center items-center p-8 xl:px-20 ">
             <div className=" flex flex-col container mx-auto  justify-evenly h-full p-5 bg-gradient-to-r from-primary via-blue-600 to-purple-600 rounded-lg">
@@ -436,7 +436,7 @@ export default function Single_analyzer({ user_data }) {
             </div>
           </div>
         </>
-      ) : (
+      ) : 
         <div className="flex flex-col w-full items-center">
           <h1 className="lg:text-5xl text-4xl font-extrabold mt-10 text-center">AI Resume Analyzer</h1>
           <p className="lg:text-xl text-lg my-4 text-gray-700 lg:px-32 px-5 text-center">Upload your resume to get instant AI-powered insights, ATS scoring, and personalized improvement suggestions powered by Lama AI.</p>
@@ -463,7 +463,7 @@ export default function Single_analyzer({ user_data }) {
                           ))}
                         </div>
         </div>
-      )
+    
       }
 
       <Footer />

@@ -9,25 +9,19 @@ import {
 import axios from "axios";
 import Loader from "../loader/small_laoder";
 import React, { useState } from "react";
-import { useProvider } from "../../context/user_data";
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL ?? '';
+const locUrl = process.env.REACT_APP_LOC_URL ?? '';
+const env = process.env.REACT_APP_LOC?.toLowerCase();
+
+const Url = env === 'local' ? locUrl : apiUrl;
+
 
 export const Chatbot = ({ parsedText, ats,role }) => {
   const [ischatting, setIschatting] = useState(false);
   const [preChat, setPreChat] = useState('');
   const [chatIncoming, setChatIncoming] = useState(true);
-  const {fileName} = useProvider();
-  const [chatResponse,setChatResponse] = useState(''); 
   const [message,setMessage] = useState([
-    {
-      role: "user",
-      content: `yooooooo beyach`,
-    }
-    ,
-        {
-      role: "system",
-      content: `Welcome to AI Carrer Coach, ${fileName}! I'm here to help you analyze your resume and provide you with personalized advice based on your skills and experience.`,
-    }
+    
   ]);
   const delay_funt = async () =>
     {
@@ -40,13 +34,16 @@ export const Chatbot = ({ parsedText, ats,role }) => {
                 {
                   return;
                 }
+                const currMessage = {role:'user',content:preChat};
+                const updatedMessage =[...message,currMessage];
                 setChatIncoming(true);
-                setMessage((prev) => [...prev,{role: "user", content: preChat}]);
+                setMessage(updatedMessage);
+                console.log(message);
                 setPreChat('');
                 setIschatting(true);
                 try
                 {
-                  let res = await axios.post(`${apiUrl}api/resume/query`,{parsedText,query:preChat});
+                  let res = await axios.post(`${Url}/api/resume/query`,{parsedText,query:updatedMessage});
                   console.log(res)
                   setChatIncoming(false);
                     setMessage((prev) => [...prev,{role: "system", content: res.data.response}]);
@@ -117,13 +114,12 @@ export const Chatbot = ({ parsedText, ats,role }) => {
                               : "text-start bg-primary text-white "
                           } `}
                         >
-                          <p>{mess.content}</p>
+                          <div className="whitespace-pre-line">{mess.content}</div>
                         </div>
                       </div>
                     );
                 })}
             </>}
-            //loader for chat if incoming
                     {chatIncoming && 
                       <div className="text-start bg-primary w-fit text-white message  tracking-tight text-[15px] font-[600] px-8  py-2 rounded-xl">
                         <Loader/>

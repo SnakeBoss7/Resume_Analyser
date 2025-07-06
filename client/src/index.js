@@ -4,18 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './App.css'
-import { ResumeProvider } from './context/user_data';
+import { ResumeProvider } from './context/ResumeDataContext';
+import { EnhancedProvider} from './context/ResumeEnhanceContext'
 import { BrowserRouter } from 'react-router-dom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
     <ResumeProvider>
+      <EnhancedProvider>
     <App />
+      </EnhancedProvider>
     </ResumeProvider>
     </BrowserRouter>
-
   </React.StrictMode>
+        
+
 );
 
 // If you want to start measuring performance in your app, pass a function

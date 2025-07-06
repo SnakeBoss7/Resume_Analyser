@@ -6,10 +6,10 @@ import Features from "../../components/features";
 import iconMap from "../../icons/icon"; 
 import Header from "../../components/Header/header";
 import { FaArrowRight,FaFileAlt,FaMagic,FaUsers } from "react-icons/fa";
-import { useProvider } from '../../context/user_data';
+import { useResumeProvider } from '../../context/ResumeDataContext';
 import { HandleUpload } from "../../utils/upload";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 const featuresData = [
   {
     icon: 'NewspaperIcon',
@@ -33,8 +33,8 @@ const featuresData = [
 
 ];
 
-export default function Landing() {
-  const {userData,setUserData,parsedText,setParsedText} = useProvider();
+export default function Home() {
+  const {userData,setUserData,parsedText,setParsedText} = useResumeProvider();
 
   const [file_name, setFile_name] = useState("");
   const [mess, setMess] = useState("");
@@ -61,13 +61,13 @@ export default function Landing() {
   return (
     <div
       className=" flex flex-col gap-10 items-center"
-      style={{ backgroundColor:"#E9EEF4" }}
+      style={{ backgroundColor: "#E9EEF4" }}
     >
       {/* Header section  */}
       <Header
         pages={["Resmue analyzer", "Hr Dashboard", "Resume Builder"]}
         links={["single_analyzer", "Hr_dashboard", "ResumeBuilder"]}
-        icons={[FaFileAlt, FaUsers,FaMagic]}
+        icons={[FaFileAlt, FaUsers, FaMagic]}
       />
       {/* Theme toggle button  */}
       {/* Hero section  */}
@@ -138,9 +138,11 @@ export default function Landing() {
               prospects with ResumeAI.
             </h3>
           </div>
-          <button className="border-2 flex justify-center items-center gap-3 rounded-lg text-lg bg-white text-black font-bold w-auto px-4 py-2">
+          <Link to="/single_analyzer"
+            className="border-2 flex justify-center items-center gap-3
+            rounded-lg text-lg bg-white text-black font-bold w-auto px-4 py-2">
             Start Free Analysis <FaArrowRight />
-          </button>
+          </Link>
         </div>
       </div>
 
