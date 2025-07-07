@@ -11,9 +11,12 @@ import Loader from "../loader/small_laoder";
 import React, { useState } from "react";
 const apiUrl = process.env.REACT_APP_API_URL ?? '';
 const locUrl = process.env.REACT_APP_LOC_URL ?? '';
-const env = process.env.REACT_APP_LOC?.toLowerCase();
+const env = process.env.REACT_APP_LOC ?? 'production';
 
-const Url = env === 'local' ? locUrl : apiUrl;
+const Url = ['local', 'development'].includes(env.toLowerCase())
+  ? locUrl
+  : apiUrl;
+
 
 
 export const Chatbot = ({ parsedText, ats,role }) => {
@@ -30,6 +33,10 @@ export const Chatbot = ({ parsedText, ats,role }) => {
     }
     const handleChat = async()=>
         {
+          console.log('ENV value:', process.env.REACT_APP_LOC);
+          console.log('env:', env);
+          console.log('ENV its what it is: ' , process.env);
+console.log('Selected URL:', Url);
             if(preChat === '')
                 {
                   return;

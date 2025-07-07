@@ -26,7 +26,7 @@ import {
 import { useResumeProvider } from "../../context/ResumeDataContext";
 import { SparklesIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
 import { color } from "framer-motion";
-import { HandleUpload } from "../../utils/upload";
+import { HandleUploadAnlayze } from "../../utils/hanldeUploadAnalyze";
 import { useNavigate } from "react-router-dom";
 import Features from "../../components/features";
 import iconMap from "../../icons/icon"; 
@@ -62,7 +62,7 @@ export default function Single_analyzer({ user_data }) {
    const handleFile = async (File)=>
       {
 
-        let {data,mess,text} = await HandleUpload(File);
+        let {data,mess,text} = await HandleUploadAnlayze(File);
         if(data)
           {
             setUserData(data);

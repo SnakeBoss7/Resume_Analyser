@@ -1,7 +1,9 @@
 import iconMap from "../../../icons/icon";
 import FileDropzone from "../../../components/FileDropzone";
 import Features from "../../../components/features";
-import { HandleUpload } from "../../../utils/upload";
+import HandleUploadEnhacne from "../../../utils/handleUploadEnhance";
+
+
 import { useNavigate } from "react-router-dom";
 import { useResumeProvider } from "../../../context/ResumeDataContext";
 import { useState } from "react";
@@ -34,22 +36,16 @@ const featuresData = [
         
 export default function  Enhancer  () 
 {
-     const { userData, setUserData, setParsedText, parsedText } =
-    useResumeProvider();
-  const [activeTab, setActiveTab] = useState("");
-  console.log(userData);
-  console.log(parsedText);
+
   const navigate = useNavigate();
-  const handleFile = async (File) => {
-    let { data, mess, text } = await HandleUpload(File);
-    if (data) {
-      setUserData(data);
-      setParsedText(text);
-      navigate("/single_analyzer");
-    } else {
-      setUserData(null);
-    }
-  };
+
+const handleFile = async (File) => {
+  await HandleUploadEnhacne(File); // ✅ no crash now
+  
+};
+
+
+  
     const data ='';
     return(
             <div>

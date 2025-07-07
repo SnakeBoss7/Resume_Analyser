@@ -7,9 +7,10 @@ import iconMap from "../../icons/icon";
 import Header from "../../components/Header/header";
 import { FaArrowRight,FaFileAlt,FaMagic,FaUsers } from "react-icons/fa";
 import { useResumeProvider } from '../../context/ResumeDataContext';
-import { HandleUpload } from "../../utils/upload";
+import { HandleUploadAnlayze } from "../../utils/hanldeUploadAnalyze";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import handleUploadEnhance from "../../utils/handleUploadEnhance";
 const featuresData = [
   {
     icon: 'NewspaperIcon',
@@ -43,7 +44,7 @@ export default function Home() {
     
  const HandleFile = async (File)=>
     {
-      let {data,mess,text} = await HandleUpload(File);
+      let {data,mess,text} = await HandleUploadAnlayze(File);
       if(data)
         {
           setUserData(data);

@@ -1,0 +1,68 @@
+You will receive raw resume text.
+Your task is to extract and enhance the resume section-by-section and return a clean, valid JSON object.
+
+NOTE!!!!!:
+1.No assumptions — only use what is explicitly mentioned in the resume.
+2.Do NOT return empty strings or empty arrays.
+3. IF A FIELD LIKE LINKEDIN, PORTFOLIO, OR PROJECTS IS MISSING — OR ANY SUBFIELD OF SKILLS IS MISSING — OMIT THAT FIELD ENTIRELY. (DON'T JUST LEAVE IT EMPTY)
+
+Your output must be valid JSON only — no markdown, no headings, no extra explanation.
+
+Output must be parsable with JSON.parse().
+
+🎯 For Each Section:
+Include:
+
+original: Text exactly as found in the resume
+
+enhanced: Realistic, ATS-friendly rewrite (keep it concise and professional)
+
+reason: Brief explanation of changes (clarity, tone, formatting, keywords, etc.)
+{
+  "contact": {
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "location": "City or Area"
+    // Only include if found:
+    // "linkedin": "LinkedIn URL",
+    // "portfolio": "Portfolio URL"
+  },
+  "summary": {
+    "original": "Raw summary text",
+    "enhanced": "Polished, ATS-friendly version",
+    "reason": "Why it was improved (clarity, tone, structure, keywords)"
+  },
+  "skills": {
+    "original": "Raw skills section",
+    "enhanced": {
+      "technical_skills": [],
+      "soft_skills": [],
+      "domain_knowledge": [],
+      "tools_technologies": [],
+      "languages_spoken": [],
+      "certifications_or_methods": [],
+      "others": []
+    },
+    "reason": "Grouped and cleaned skills into proper categories with no additions."
+  },
+  "projects": [
+    {
+      "name": "Project Title",
+      "original": "Raw project description",
+      "enhanced": "Clean rewrite with structure and outcomes (if available)",
+      "technologies": ["List only tech/tools mentioned in resume"],
+      "reason": "Improved clarity and formatting, without adding anything new."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Full degree name",
+      "institution": "School/College",
+      "duration": "Start – End (add 'Expected' if ongoing)",
+      "original": "Raw education section",
+      "reason": "Formatted for readability and consistency"
+    }
+  ]
+}
+

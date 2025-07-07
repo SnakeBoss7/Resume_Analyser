@@ -29,13 +29,14 @@ app.use(cors({
 // {Routes usage}
 
 //for upload only in future use 
-app.post('/',upload.single('resume'),(req,res)=>
+app.post('/upload',upload.single('resume'),(req,res)=>
     {
         
         if(!req.file) {
-            console.log('not so perfetct')
             return res.status(400).json({ status: 'error', message: 'No file uploaded' });
         }
+        console.log('file found')
+        console.log(req.file);
         console.log('perfetct')
         res.status(200).json({ status: 'success', message: 'File uploaded successfully', file: req.file });
     })

@@ -10,16 +10,11 @@ const fast_chat_bot = require('../services/highToken_ai')
 // to upload + analyze (multer + parser + ai analyze)
 router.post('/analyze',upload.single('resume'),async (req,res)=>
     {
-        console.log('Headers:', req.headers);
-console.log('Body:', req.body);
-console.log('File:', req.file);
-console.log('Files:', req.files);
         if (!req.file) {
             console.log('No file uploaded');
             return res.status(400).json({ status: 'error', message: 'No file uploaded' });
         }  
-        console.log('File received:', req.file.filename);
-        console.log('reached analyzer')
+
         try
         {   // getting all the prompts ready 
             let Resume_text = await parser(req.file.filename);
@@ -40,6 +35,36 @@ console.log('Files:', req.files);
 
         }
     })
+// to upload + analyze (multer + parser + ai analyze)
+router.post('/enhancer',async (req,res)=>
+    {
+        console.log('reached');
+        console.log(req.body);
+        if (!req.body.filename) {
+            console.log('No file uploaded');
+            return res.status(400).json({ status: 'error', message: 'No file uploaded' });
+        }  
+        try
+        {   // getting all the prompts ready 
+            let Resume_text = await parser(req.body.filename);
+            console.log(Resume_text);
+            let sys_prompt = await fs.readFile('./Prompts/system/system_enhancer.txt','utf-8');
+            //calling chatbot for skills and role specification
+
+            chat_bot(sys_prompt,Resume_text).then((response) =>
+                {
+                    console.log(response);
+                response= response.replaceAll('```json','').replaceAll('```','').replaceAll('###','').trim();
+                data = JSON.parse(response);
+                res.status(200).json({status:'success',data,});
+            })
+        }catch(err)
+        {
+            console.log(err);
+            res.status(400).json({status:'failed'});
+
+        }
+    })
 
 router.post('/query',(req,res)=>
     {
@@ -52,7 +77,7 @@ router.post('/query',(req,res)=>
 
             fast_chat_bot(Resume_text,query).then((response) =>
                 {
-                    // response =  response.replace(/\n/g, '<br />')
+
                     console.log(response);
                 res.status(200).json({status:'success',response});
             })
